@@ -54,7 +54,7 @@ export default function CountyPage({ countySlug }: { countySlug?: string } = {})
         "@type": "LocalBusiness",
         "name": "Cash Ready Homes Hudson Valley",
         "description": description,
-        "url": `https://www.cashreadyhomeshudsonvalley.com${canonical}`,
+        "url": `https://cashreadyhomeshudsonvalley.com${canonical}`,
         "telephone": "+19293565144",
         "areaServed": {
           "@type": "AdministrativeArea",

@@ -6,92 +6,137 @@ interface SEOHeadProps {
   keywords?: string | string[];
   canonical?: string;
   ogImage?: string;
+  ogType?: "website" | "article";
+  publishedTime?: string;
   schema?: object;
   noIndex?: boolean;
 }
 
 const DEFAULT_TITLE = "Sell Your House Fast in Hudson Valley NY | Cash Ready Homes";
 const DEFAULT_DESC = "We buy houses for cash in Westchester, Dutchess, Orange, Putnam, Rockland & Ulster Counties. No repairs, no fees, no commissions. Get a fair cash offer in 24 hours. Call (929) 356-5144.";
-const SITE_URL = "https://www.cashreadyhomeshudsonvalley.com";
-const OG_IMAGE = "/og-image.jpg";
+// Canonical host — matches the live site's canonicals and sitemap (bare domain).
+export const SITE_URL = "https://cashreadyhomeshudsonvalley.com";
 
-export default function SEOHead({
-  title = DEFAULT_TITLE,
-  description = DEFAULT_DESC,
-  keywords,
-  canonical,
-  ogImage = OG_IMAGE,
-  schema,
-  noIndex = false,
-}: SEOHeadProps) {
+export interface ResolvedHead {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  ogImageUrl?: string;
+  ogType: string;
+  publishedTime?: string;
+  schema?: object;
+  noIndex: boolean;
+}
+
+/** During prerender (SSR) the last-rendered SEOHead writes here; entry-server reads it. */
+export const ssrHeadCollector: { current: ResolvedHead | null } = { current: null };
+
+function resolve(p: SEOHeadProps): ResolvedHead {
+  const abs = (u?: string) => (u ? (u.startsWith("http") ? u : `${SITE_URL}${u}`) : undefined);
+  return {
+    title: p.title ?? DEFAULT_TITLE,
+    description: p.description ?? DEFAULT_DESC,
+    keywords: p.keywords ? (Array.isArray(p.keywords) ? p.keywords.join(", ") : p.keywords) : undefined,
+    canonicalUrl: p.canonical !== undefined ? abs(p.canonical) : undefined,
+    ogImageUrl: abs(p.ogImage),
+    ogType: p.ogType ?? "website",
+    publishedTime: p.publishedTime,
+    schema: p.schema,
+    noIndex: p.noIndex ?? false,
+  };
+}
+
+const esc = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** Build the <head> tags as an HTML string (used by the prerender step). */
+export function headToHtml(h: ResolvedHead): string {
+  const t: string[] = [];
+  t.push(`<title>${esc(h.title)}</title>`);
+  t.push(`<meta name="description" content="${esc(h.description)}" />`);
+  if (h.keywords) t.push(`<meta name="keywords" content="${esc(h.keywords)}" />`);
+  t.push(`<meta name="robots" content="${h.noIndex ? "noindex, nofollow" : "index, follow"}" />`);
+  t.push(`<meta property="og:type" content="${h.ogType}" />`);
+  t.push(`<meta property="og:title" content="${esc(h.title)}" />`);
+  t.push(`<meta property="og:description" content="${esc(h.description)}" />`);
+  t.push(`<meta property="og:site_name" content="Cash Ready Homes Hudson Valley" />`);
+  t.push(`<meta property="og:locale" content="en_US" />`);
+  t.push(`<meta name="twitter:card" content="${h.ogImageUrl ? "summary_large_image" : "summary"}" />`);
+  t.push(`<meta name="twitter:title" content="${esc(h.title)}" />`);
+  t.push(`<meta name="twitter:description" content="${esc(h.description)}" />`);
+  if (h.canonicalUrl) {
+    t.push(`<link rel="canonical" href="${esc(h.canonicalUrl)}" />`);
+    t.push(`<meta property="og:url" content="${esc(h.canonicalUrl)}" />`);
+  }
+  if (h.ogImageUrl) {
+    t.push(`<meta property="og:image" content="${esc(h.ogImageUrl)}" />`);
+    t.push(`<meta name="twitter:image" content="${esc(h.ogImageUrl)}" />`);
+  }
+  if (h.publishedTime) t.push(`<meta property="article:published_time" content="${esc(h.publishedTime)}" />`);
+  if (h.schema) {
+    t.push(
+      `<script type="application/ld+json" id="page-schema">${JSON.stringify(h.schema).replace(/</g, "\\u003c")}</script>`,
+    );
+  }
+  return t.join("\n    ");
+}
+
+export default function SEOHead(props: SEOHeadProps) {
+  const h = resolve(props);
+  if (typeof window === "undefined") ssrHeadCollector.current = h;
+
   useEffect(() => {
-    // Title
-    document.title = title;
-
-    // Helper to set or create a meta tag
-    const setMeta = (selector: string, content: string) => {
-      let el = document.querySelector(selector) as HTMLMetaElement | null;
+    document.title = h.title;
+    const setMeta = (attr: "name" | "property", key: string, content?: string) => {
+      let el = document.head.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
+      if (!content) {
+        el?.remove();
+        return;
+      }
       if (!el) {
         el = document.createElement("meta");
-        const attr = selector.includes("property=") ? "property" : "name";
-        const val = selector.match(/["']([^"']+)["']/)?.[1] ?? "";
-        el.setAttribute(attr, val);
+        el.setAttribute(attr, key);
         document.head.appendChild(el);
       }
       el.setAttribute("content", content);
     };
+    setMeta("name", "description", h.description);
+    setMeta("name", "keywords", h.keywords);
+    setMeta("name", "robots", h.noIndex ? "noindex, nofollow" : "index, follow");
+    setMeta("property", "og:type", h.ogType);
+    setMeta("property", "og:title", h.title);
+    setMeta("property", "og:description", h.description);
+    setMeta("name", "twitter:card", h.ogImageUrl ? "summary_large_image" : "summary");
+    setMeta("name", "twitter:title", h.title);
+    setMeta("name", "twitter:description", h.description);
+    setMeta("property", "og:url", h.canonicalUrl);
+    setMeta("property", "og:image", h.ogImageUrl);
+    setMeta("name", "twitter:image", h.ogImageUrl);
+    setMeta("property", "article:published_time", h.publishedTime);
 
-    const setLink = (rel: string, href: string) => {
-      let el = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
-      if (!el) {
-        el = document.createElement("link");
-        el.setAttribute("rel", rel);
-        document.head.appendChild(el);
+    let link = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (h.canonicalUrl) {
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "canonical";
+        document.head.appendChild(link);
       }
-      el.setAttribute("href", href);
-    };
+      link.href = h.canonicalUrl;
+    } else link?.remove();
 
-    setMeta('meta[name="description"]', description);
-    if (keywords) setMeta('meta[name="keywords"]', Array.isArray(keywords) ? keywords.join(", ") : keywords);
-    setMeta('meta[property="og:title"]', title);
-    setMeta('meta[property="og:description"]', description);
-    setMeta('meta[property="og:image"]', `${SITE_URL}${ogImage}`);
-    setMeta('meta[property="og:type"]', "website");
-    setMeta('meta[property="og:site_name"]', "Cash Ready Homes Hudson Valley");
-    setMeta('meta[name="twitter:card"]', "summary_large_image");
-    setMeta('meta[name="twitter:title"]', title);
-    setMeta('meta[name="twitter:description"]', description);
-
-    if (canonical) {
-      setLink("canonical", `${SITE_URL}${canonical}`);
-      setMeta('meta[property="og:url"]', `${SITE_URL}${canonical}`);
-    }
-
-    if (noIndex) {
-      setMeta('meta[name="robots"]', "noindex, nofollow");
-    } else {
-      setMeta('meta[name="robots"]', "index, follow");
-    }
-
-    // JSON-LD schema
-    if (schema) {
-      let schemaEl = document.getElementById("page-schema");
+    let schemaEl = document.getElementById("page-schema");
+    if (h.schema) {
       if (!schemaEl) {
         schemaEl = document.createElement("script");
         schemaEl.id = "page-schema";
         schemaEl.setAttribute("type", "application/ld+json");
         document.head.appendChild(schemaEl);
       }
-      schemaEl.textContent = JSON.stringify(schema);
-    }
-
-    return () => {
-      // Cleanup schema on unmount
-      if (schema) {
-        document.getElementById("page-schema")?.remove();
-      }
-    };
-  }, [title, description, canonical, ogImage, schema, noIndex]);
+      schemaEl.textContent = JSON.stringify(h.schema);
+    } else schemaEl?.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(h)]);
 
   return null;
 }

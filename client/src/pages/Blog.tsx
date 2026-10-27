@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import SEOHead from "@/components/SEOHead";
-import { trpc } from "@/lib/trpc";
+import { getAllPosts } from "@/lib/blog";
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -14,7 +14,8 @@ function readingTime(content: string) {
 }
 
 export default function Blog() {
-  const { data, isLoading } = trpc.blog.list.useQuery({ limit: 20, offset: 0 });
+  const data = { posts: getAllPosts() };
+  const isLoading = false;
 
   return (
     <SiteLayout>

@@ -50,7 +50,7 @@ const schema = {
       "@type": "LocalBusiness",
       "name": "Cash Ready Homes Hudson Valley",
       "description": "We buy houses for cash throughout the Hudson Valley, NY — Westchester, Dutchess, Orange, Putnam, Rockland, and Ulster Counties. Any condition, any situation. Free offer in 24 hours.",
-      "url": "https://www.cashreadyhomeshudsonvalley.com/we-buy-houses-hudson-valley-ny",
+      "url": "https://cashreadyhomeshudsonvalley.com/we-buy-houses-hudson-valley-ny",
       "telephone": "+19293565144",
       "areaServed": [
         { "@type": "AdministrativeArea", "name": "Westchester County", "addressRegion": "NY" },

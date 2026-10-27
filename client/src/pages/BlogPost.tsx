@@ -3,7 +3,8 @@ import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import SEOHead from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
-import { trpc } from "@/lib/trpc";
+import { getPostBySlug } from "@/lib/blog";
+import NotFound from "@/pages/NotFound";
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -90,7 +91,10 @@ function renderContent(content: string) {
 
 export default function BlogPost() {
   const params = useParams<{ slug: string }>();
-  const { data: post, isLoading, error } = trpc.blog.bySlug.useQuery({ slug: params.slug ?? "" });
+  const post = getPostBySlug(params.slug ?? "");
+  const isLoading = false;
+  if (!post) return <NotFound />;
+  const error = null;
 
   if (isLoading) {
     return (
@@ -118,38 +122,40 @@ export default function BlogPost() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": post.metaTitle ?? post.title,
-    "description": post.metaDescription ?? post.excerpt,
-    "image": post.featuredImage ? `https://www.cashreadyhomeshudsonvalley.com${post.featuredImage}` : undefined,
+    "headline": post.metaTitle || post.title,
+    "description": post.metaDescription || post.excerpt,
+    "image": post.featuredImage ? `https://cashreadyhomeshudsonvalley.com${post.featuredImage}` : undefined,
     "datePublished": new Date(post.createdAt).toISOString(),
     "dateModified": new Date(post.updatedAt ?? post.createdAt).toISOString(),
     "author": {
       "@type": "Organization",
       "name": "Cash Ready Homes Hudson Valley",
-      "url": "https://www.cashreadyhomeshudsonvalley.com",
+      "url": "https://cashreadyhomeshudsonvalley.com",
     },
     "publisher": {
       "@type": "Organization",
       "name": "Cash Ready Homes Hudson Valley",
-      "url": "https://www.cashreadyhomeshudsonvalley.com",
+      "url": "https://cashreadyhomeshudsonvalley.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.cashreadyhomeshudsonvalley.com/logo.png",
+        "url": "https://cashreadyhomeshudsonvalley.com/manus-storage/logo-icon-crisp_222c6ff1.png",
       },
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://www.cashreadyhomeshudsonvalley.com/blog/${post.slug}`,
+      "@id": `https://cashreadyhomeshudsonvalley.com/blog/${post.slug}`,
     },
   };
 
   return (
     <SiteLayout>
       <SEOHead
-        title={post.metaTitle ?? post.title}
-        description={post.metaDescription ?? post.excerpt}
+        title={post.metaTitle || post.title}
+        description={post.metaDescription || post.excerpt}
         canonical={`/blog/${post.slug}`}
-        ogImage={post.featuredImage ?? undefined}
+        ogImage={post.featuredImage || undefined}
+        ogType="article"
+        publishedTime={new Date(post.createdAt).toISOString()}
         schema={articleSchema}
       />
 

@@ -303,3 +303,4 @@ export default function SituationPage() {
     </SiteLayout>
   );
 }
+export const situationSlugs = Object.keys(situations);

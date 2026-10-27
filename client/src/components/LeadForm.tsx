@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 interface LeadFormProps {
@@ -24,24 +23,33 @@ export default function LeadForm({
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const submitLead = trpc.leads.submit.useMutation({
-    onSuccess: () => {
-      setSubmitted(true);
-      toast.success("We received your request! We'll be in touch within 24 hours.");
-    },
-    onError: (err) => {
-      toast.error("Something went wrong. Please try again or call us directly.");
-      console.error(err);
-    },
-  });
+  const [pending, setPending] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.propertyAddress || !form.fullName || !form.email || !form.phone) {
       toast.error("Please fill in all required fields.");
       return;
     }
-    submitLead.mutate({ ...form, sourcePage });
+    setPending(true);
+    try {
+      // Handled by the Cloudflare Pages Function in /functions/api/lead.js
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, sourcePage, website: honeypot }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { success?: boolean; error?: string };
+      if (!res.ok || !data.success) throw new Error(data.error || `HTTP ${res.status}`);
+      setSubmitted(true);
+      toast.success("We received your request! We'll be in touch within 24 hours.");
+    } catch (err) {
+      toast.error("Something went wrong. Please try again or call us directly.");
+      console.error(err);
+    } finally {
+      setPending(false);
+    }
   };
 
   if (submitted) {
@@ -83,6 +91,13 @@ export default function LeadForm({
       <p className={subClass}>{subheadline}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Honeypot: hidden from people, bots fill it in. */}
+        <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+          <label>
+            Website
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={e => setHoneypot(e.target.value)} />
+          </label>
+        </div>
         <div>
           <label className={labelClass}>Property Address *</label>
           <input
@@ -148,10 +163,10 @@ export default function LeadForm({
 
         <button
           type="submit"
-          disabled={submitLead.isPending}
+          disabled={pending}
           className="btn-yellow w-full py-4 rounded-xl text-base font-black tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {submitLead.isPending ? "Submitting..." : "GET MY FREE CASH OFFER →"}
+          {pending ? "Submitting..." : "GET MY FREE CASH OFFER →"}
         </button>
 
         <p className={`text-center text-xs ${isHero ? "text-gray-400" : "text-gray-500"}`}>
