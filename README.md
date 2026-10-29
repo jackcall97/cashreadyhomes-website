@@ -48,8 +48,11 @@ Cloudflare Pages settings: **Build command** `pnpm build`, **Output dir** `dist/
    Cloudflare Pages rebuilds on push. `published: false` hides a draft.
 
 ## Lead form env vars (Pages → Settings → Variables and Secrets)
-- `RESIMPLI_API_TOKEN` (secret, **required**). `RESIMPLI_WEBFORM_LINK` is optional (defaults to `6977ca6a5c1fcabc2e8dcb3e`).
+- `RESIMPLI_API_TOKEN` (secret, **required**). Raw REsimpli 6.0 Open API key (Authorization header, no `Bearer` prefix).
+- Optional overrides (defaults match the Cash Ready Homes account):
+  - `RESIMPLI_API_URL` — default `https://api.resimpli.com/api/v6/openapi/lead/add`
+  - `RESIMPLI_MARKETING_CAMPAIGN_ID`, `RESIMPLI_MARKET_ID`, `RESIMPLI_PIPELINE_ID`, `RESIMPLI_MAIN_STATUS_ID`
 - Email copy: `EMAIL_PROVIDER` = `resend` | `mailchannels` | `webhook` (unset = no email), `EMAIL_API_KEY`, `EMAIL_WEBHOOK_URL`, `LEAD_EMAIL_TO` (default jack@cashreadyhomeshudsonvalley.com), `LEAD_EMAIL_FROM`.
 - Analytics: set `CF_BEACON_TOKEN` (build env) to inject Cloudflare Web Analytics, or enable Web Analytics on the Pages project, which injects it automatically.
 
-Leads are no longer stored in a database; REsimpli plus the email copy are the record.
+Leads are no longer stored in a database; REsimpli plus the email copy are the record. The old v4 web-form host (`live-api.resimpli.com`) was retired with REsimpli 6.0.

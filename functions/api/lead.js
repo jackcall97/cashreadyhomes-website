@@ -1,20 +1,30 @@
 // Cloudflare Pages Function: POST /api/lead
 // Replaces the Manus tRPC `leads.submit` mutation.
 //  1. Validates input (same rules as the old zod schema) + honeypot.
-//  2. Forwards the lead to REsimpli exactly like the old server code.
+//  2. Forwards the lead to REsimpli Open API v6 (create lead).
 //  3. Emails a copy to the owner via a pluggable provider (env EMAIL_PROVIDER).
 //
 // Environment variables (Pages project > Settings > Variables & Secrets):
-//   RESIMPLI_API_TOKEN      (secret, required to forward leads to REsimpli)
-//   RESIMPLI_WEBFORM_LINK   (optional, defaults to the current form id)
-//   EMAIL_PROVIDER          "resend" | "mailchannels" | "webhook" | unset (no email)
-//   EMAIL_API_KEY           (secret; Resend API key, or bearer token for webhook)
-//   EMAIL_WEBHOOK_URL       (for EMAIL_PROVIDER=webhook, e.g. a Zapier/Make hook)
-//   LEAD_EMAIL_TO           default jack@cashreadyhomeshudsonvalley.com
-//   LEAD_EMAIL_FROM         e.g. "Website Leads <leads@cashreadyhomeshudsonvalley.com>"
+//   RESIMPLI_API_TOKEN              (secret, required to forward leads to REsimpli)
+//   RESIMPLI_API_URL                (optional; default v6 lead/add endpoint)
+//   RESIMPLI_MARKETING_CAMPAIGN_ID  (optional; defaults to account campaign)
+//   RESIMPLI_MARKET_ID              (optional)
+//   RESIMPLI_PIPELINE_ID            (optional; Active Leads)
+//   RESIMPLI_MAIN_STATUS_ID         (optional; New Leads)
+//   EMAIL_PROVIDER                  "resend" | "mailchannels" | "webhook" | unset (no email)
+//   EMAIL_API_KEY                   (secret; Resend API key, or bearer token for webhook)
+//   EMAIL_WEBHOOK_URL               (for EMAIL_PROVIDER=webhook, e.g. a Zapier/Make hook)
+//   LEAD_EMAIL_TO                   default jack@cashreadyhomeshudsonvalley.com
+//   LEAD_EMAIL_FROM                 e.g. "Website Leads <leads@cashreadyhomeshudsonvalley.com>"
 
-const DEFAULT_WEBFORM_LINK = "6977ca6a5c1fcabc2e8dcb3e";
-const RESIMPLI_URL = "https://live-api.resimpli.com/api/v4/webForm/createLead";
+// REsimpli 6.0 Open API — every call is POST under /api/v6/openapi.
+// Auth: raw API key in Authorization (NO "Bearer" prefix).
+// Campaign field is intentionally misspelled marketingCampignId in their API.
+const DEFAULT_RESIMPLI_URL = "https://api.resimpli.com/api/v6/openapi/lead/add";
+const DEFAULT_MARKETING_CAMPAIGN_ID = "6aa4e257ab4bfde2eb309bcf"; // Outbound SMS & Calling (only campaign on account)
+const DEFAULT_MARKET_ID = "6966fe0079f37bfe42a74f3c"; // Primary Market
+const DEFAULT_PIPELINE_ID = "6aa4dc07d18014f8fc590a12"; // Active Leads
+const DEFAULT_MAIN_STATUS_ID = "6aa4dc07d18014f8fc590a13"; // New Leads
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -41,25 +51,48 @@ export function validateLead(body) {
   return { lead, errors };
 }
 
+/** Split "First Last" into first/last; single token goes in firstName. */
+export function splitName(fullName) {
+  const parts = String(fullName || "").trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return { firstName: "", lastName: "" };
+  if (parts.length === 1) return { firstName: parts[0], lastName: "" };
+  return { firstName: parts[0], lastName: parts.slice(1).join(" ") };
+}
+
 export async function sendToResimpli(lead, env, fetchImpl = fetch) {
   if (!env.RESIMPLI_API_TOKEN) {
     console.error("[REsimpli] RESIMPLI_API_TOKEN not set; lead not forwarded");
     return { ok: false, reason: "not-configured" };
   }
+  const url = env.RESIMPLI_API_URL || DEFAULT_RESIMPLI_URL;
+  const { firstName, lastName } = splitName(lead.fullName);
+  const phoneDigits = lead.phone.replace(/\D/g, "");
+  const body = {
+    contactDetails: {
+      firstName,
+      lastName,
+      phoneNumbers: [{ phoneNumber: phoneDigits, isPrimary: true }],
+      emails: [{ email: lead.email, isPrimary: true }],
+    },
+    propertyType: "residential",
+    address: lead.propertyAddress,
+    // Spelling is intentional — REsimpli's Open API uses marketingCampignId.
+    marketingCampignId: env.RESIMPLI_MARKETING_CAMPAIGN_ID || DEFAULT_MARKETING_CAMPAIGN_ID,
+    marketId: env.RESIMPLI_MARKET_ID || DEFAULT_MARKET_ID,
+    pipelineId: env.RESIMPLI_PIPELINE_ID || DEFAULT_PIPELINE_ID,
+    mainStatusId: env.RESIMPLI_MAIN_STATUS_ID || DEFAULT_MAIN_STATUS_ID,
+    comment: `Website lead${lead.sourcePage ? ` from ${lead.sourcePage}` : ""}${
+      lead.smsConsent ? " (SMS consent: yes)" : ""
+    }`,
+  };
   try {
-    const res = await fetchImpl(RESIMPLI_URL, {
+    const res = await fetchImpl(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        webFormLink: env.RESIMPLI_WEBFORM_LINK || DEFAULT_WEBFORM_LINK,
         Authorization: env.RESIMPLI_API_TOKEN,
       },
-      body: JSON.stringify({
-        ownerName1: lead.fullName,
-        phoneNumber: lead.phone.replace(/\D/g, ""),
-        email: lead.email,
-        address: lead.propertyAddress,
-      }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       console.error("[REsimpli] Failed to create lead:", res.status, await res.text());
@@ -67,10 +100,10 @@ export async function sendToResimpli(lead, env, fetchImpl = fetch) {
     }
     const data = await res.json().catch(() => ({}));
     if (data.statusCode !== 200) {
-      console.error("[REsimpli] API error:", data.message);
+      console.error("[REsimpli] API error:", data.message || data);
       return { ok: false, reason: "api-error" };
     }
-    return { ok: true };
+    return { ok: true, id: data.data && data.data._id };
   } catch (err) {
     console.error("[REsimpli] Exception sending lead:", err);
     return { ok: false, reason: "exception" };
