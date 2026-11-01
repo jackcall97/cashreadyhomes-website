@@ -2,7 +2,7 @@ import { useParams } from "wouter";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 interface SituationData {
@@ -232,7 +232,6 @@ export default function SituationPage() {
           "@context": "https://schema.org",
           "@graph": [
             businessEntity(),
-            personEntity(),
             {
               "@type": "WebPage",
               "@id": `${SITE_URL}${canonical}#webpage`,

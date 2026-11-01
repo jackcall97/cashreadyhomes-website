@@ -1,6 +1,6 @@
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 export default function Contact() {
@@ -14,7 +14,6 @@ export default function Contact() {
           "@context": "https://schema.org",
           "@graph": [
             businessEntity(),
-            personEntity(),
             {
               "@type": "ContactPage",
               "@id": `${SITE_URL}/contact#webpage`,

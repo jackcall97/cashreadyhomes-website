@@ -1,7 +1,7 @@
 import { Star, CheckCircle, ArrowRight, Handshake, Zap, Heart, Home as HomeIcon, ClipboardList, Target } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead, { BUSINESS_ID, JACK_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 const PHONE_HREF = "tel:+19293565144";
@@ -27,7 +27,6 @@ export default function About() {
           "@context": "https://schema.org",
           "@graph": [
             businessEntity(),
-            personEntity(),
             {
               "@type": "AboutPage",
               "@id": `${SITE_URL}/about#webpage`,
@@ -35,7 +34,7 @@ export default function About() {
               name: "About Cash Ready Homes Hudson Valley",
               description: "Locally owned cash home buying company serving six Hudson Valley counties.",
               about: { "@id": BUSINESS_ID },
-              mainEntity: { "@id": JACK_ID },
+              mainEntity: { "@id": BUSINESS_ID },
             },
           ],
         }}
@@ -65,7 +64,7 @@ export default function About() {
           </div>
           <div className="space-y-5 text-gray-600 leading-relaxed text-lg max-w-3xl mx-auto">
             <p>
-              Founded by Jack, Cash Ready Homes Hudson Valley was started with a simple mission: to give homeowners in the Hudson Valley a better, faster, and more dignified way to sell their homes. We are not a national franchise or a faceless corporation — we are your neighbors.
+              Cash Ready Homes Hudson Valley was started with a simple mission: to give homeowners in the Hudson Valley a better, faster, and more dignified way to sell their homes. We are not a national franchise or a faceless corporation — we are your neighbors.
             </p>
             <p>
               We have helped homeowners navigate difficult situations — foreclosure, probate, divorce, inherited properties, and more. We understand that selling a home is rarely just a financial transaction. It is often tied to one of life's most challenging moments.

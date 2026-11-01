@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead, { businessEntity, personEntity } from "@/components/SEOHead";
+import SEOHead, { businessEntity } from "@/components/SEOHead";
 
 const faqs = [
   {
@@ -80,7 +80,6 @@ export default function FAQ() {
     "@context": "https://schema.org",
     "@graph": [
       businessEntity(),
-      personEntity(),
       {
         "@type": "FAQPage",
         "mainEntity": faqs.map(f => ({

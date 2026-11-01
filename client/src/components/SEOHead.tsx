@@ -18,7 +18,6 @@ const DEFAULT_DESC = "We buy houses for cash in Westchester, Dutchess, Orange, P
 export const SITE_URL = "https://cashreadyhomeshudsonvalley.com";
 export const DEFAULT_OG_IMAGE = "/og-default.jpg";
 export const BUSINESS_ID = `${SITE_URL}/#business`;
-export const JACK_ID = `${SITE_URL}/#jack`;
 
 const COUNTIES = [
   "Westchester County",
@@ -45,8 +44,7 @@ export function businessEntity() {
     url: SITE_URL,
     telephone: "+19293565144",
     email: "jack@cashreadyhomeshudsonvalley.com",
-    founder: { "@id": JACK_ID },
-    areaServed: COUNTIES.map((name) => ({
+      areaServed: COUNTIES.map((name) => ({
       "@type": "AdministrativeArea",
       name,
       addressRegion: "NY",
@@ -61,24 +59,12 @@ export function businessEntity() {
   };
 }
 
-/** Founder Person entity — keep in sync with visible About copy. */
-export function personEntity() {
-  return {
-    "@type": "Person",
-    "@id": JACK_ID,
-    name: "Jack",
-    jobTitle: "Founder",
-    worksFor: { "@id": BUSINESS_ID },
-    url: `${SITE_URL}/about`,
-    sameAs: [...SAME_AS],
-  };
-}
 
 /** Homepage / shared graph: LocalBusiness + Person. */
 export function siteEntityGraph() {
   return {
     "@context": "https://schema.org",
-    "@graph": [businessEntity(), personEntity()],
+    "@graph": [businessEntity()],
   };
 }
 
@@ -102,7 +88,7 @@ export function businessWithFaqGraph(
 ) {
   return {
     "@context": "https://schema.org",
-    "@graph": [businessEntity(), personEntity(), faqPageNode(items)],
+    "@graph": [businessEntity(), faqPageNode(items)],
   };
 }
 
