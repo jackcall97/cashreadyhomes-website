@@ -16,6 +16,98 @@ const DEFAULT_TITLE = "Sell Your House Fast in Hudson Valley NY | Cash Ready Hom
 const DEFAULT_DESC = "We buy houses for cash in Westchester, Dutchess, Orange, Putnam, Rockland & Ulster Counties. No repairs, no fees, no commissions. Get a fair cash offer in 24 hours. Call (929) 356-5144.";
 // Canonical host — matches the live site's canonicals and sitemap (bare domain).
 export const SITE_URL = "https://cashreadyhomeshudsonvalley.com";
+export const DEFAULT_OG_IMAGE = "/og-default.jpg";
+export const BUSINESS_ID = `${SITE_URL}/#business`;
+export const JACK_ID = `${SITE_URL}/#jack`;
+
+const COUNTIES = [
+  "Westchester County",
+  "Dutchess County",
+  "Orange County",
+  "Putnam County",
+  "Rockland County",
+  "Ulster County",
+] as const;
+
+export const SAME_AS = [
+  "https://www.facebook.com/profile.php?id=61595723107949",
+  "https://www.instagram.com/cashreadyhomeshudsonvalley/",
+] as const;
+
+/** Canonical LocalBusiness entity (service-area; no street address). */
+export function businessEntity() {
+  return {
+    "@type": "LocalBusiness",
+    "@id": BUSINESS_ID,
+    name: "Cash Ready Homes Hudson Valley",
+    description:
+      "Cash home buyer serving the Hudson Valley, NY. We buy houses as-is for cash with New York attorney and title closings. Serving Westchester, Dutchess, Orange, Putnam, Rockland, and Ulster Counties.",
+    url: SITE_URL,
+    telephone: "+19293565144",
+    email: "jack@cashreadyhomeshudsonvalley.com",
+    founder: { "@id": JACK_ID },
+    areaServed: COUNTIES.map((name) => ({
+      "@type": "AdministrativeArea",
+      name,
+      addressRegion: "NY",
+      addressCountry: "US",
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "NY",
+      addressCountry: "US",
+    },
+    sameAs: [...SAME_AS],
+  };
+}
+
+/** Founder Person entity — keep in sync with visible About copy. */
+export function personEntity() {
+  return {
+    "@type": "Person",
+    "@id": JACK_ID,
+    name: "Jack",
+    jobTitle: "Founder",
+    worksFor: { "@id": BUSINESS_ID },
+    url: `${SITE_URL}/about`,
+    sameAs: [...SAME_AS],
+  };
+}
+
+/** Homepage / shared graph: LocalBusiness + Person. */
+export function siteEntityGraph() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [businessEntity(), personEntity()],
+  };
+}
+
+/** FAQPage node helper. */
+export function faqPageNode(
+  items: { question: string; answer: string }[],
+): Record<string, unknown> {
+  return {
+    "@type": "FAQPage",
+    mainEntity: items.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  };
+}
+
+/** LocalBusiness + FAQPage graph for county/city/we-buy hubs. */
+export function businessWithFaqGraph(
+  items: { question: string; answer: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [businessEntity(), personEntity(), faqPageNode(items)],
+  };
+}
+
+/** @deprecated Prefer siteEntityGraph() — kept as alias for older imports. */
+export const localBusinessSchema = siteEntityGraph();
 
 export interface ResolvedHead {
   title: string;
@@ -39,7 +131,8 @@ function resolve(p: SEOHeadProps): ResolvedHead {
     description: p.description ?? DEFAULT_DESC,
     keywords: p.keywords ? (Array.isArray(p.keywords) ? p.keywords.join(", ") : p.keywords) : undefined,
     canonicalUrl: p.canonical !== undefined ? abs(p.canonical) : undefined,
-    ogImageUrl: abs(p.ogImage),
+    // Sitewide default OG/Twitter image when a page does not pass ogImage.
+    ogImageUrl: abs(p.ogImage ?? DEFAULT_OG_IMAGE),
     ogType: p.ogType ?? "website",
     publishedTime: p.publishedTime,
     schema: p.schema,
@@ -140,28 +233,3 @@ export default function SEOHead(props: SEOHeadProps) {
 
   return null;
 }
-
-// Reusable schema builders
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "name": "Cash Ready Homes Hudson Valley",
-  "description": "We buy houses for cash in the Hudson Valley, NY area. Serving Westchester, Dutchess, Orange, Putnam, Rockland, and Ulster Counties.",
-  "url": SITE_URL,
-  "telephone": "+19293565144",
-  "email": "jack@cashreadyhomeshudsonvalley.com",
-  "areaServed": [
-    "Westchester County, NY",
-    "Dutchess County, NY",
-    "Orange County, NY",
-    "Putnam County, NY",
-    "Rockland County, NY",
-    "Ulster County, NY"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "NY",
-    "addressCountry": "US"
-  },
-  "sameAs": []
-};

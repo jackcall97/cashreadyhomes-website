@@ -1,6 +1,6 @@
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 export default function Contact() {
@@ -10,6 +10,22 @@ export default function Contact() {
         title="Contact Cash Ready Homes Hudson Valley | Get a Cash Offer"
         description="Contact Cash Ready Homes Hudson Valley to get a free cash offer on your home. Call (929) 356-5144 or fill out our form. We serve Westchester, Dutchess, Orange, Putnam, Rockland & Ulster Counties."
         canonical="/contact"
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            businessEntity(),
+            personEntity(),
+            {
+              "@type": "ContactPage",
+              "@id": `${SITE_URL}/contact#webpage`,
+              url: `${SITE_URL}/contact`,
+              name: "Contact Cash Ready Homes Hudson Valley",
+              description: "Call (929) 356-5144 or request a free cash offer. Serving six Hudson Valley counties.",
+              about: { "@id": BUSINESS_ID },
+              mainEntity: { "@id": BUSINESS_ID },
+            },
+          ],
+        }}
       />
 
       <section style={{ backgroundColor: "#1a3d1a" }} className="py-20">

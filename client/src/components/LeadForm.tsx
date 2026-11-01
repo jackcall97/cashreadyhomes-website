@@ -127,7 +127,7 @@ export default function LeadForm({
             <input
               type="tel"
               className={inputClass}
-              placeholder="(845) 555-1234"
+              placeholder="Your phone number"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
               required
@@ -140,7 +140,7 @@ export default function LeadForm({
           <input
             type="email"
             className={inputClass}
-            placeholder="john@example.com"
+            placeholder="you@email.com"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required

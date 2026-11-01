@@ -2,7 +2,7 @@ import { useParams } from "wouter";
 import { ArrowRight, CheckCircle, Star, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { businessWithFaqGraph } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 import { getCityBySlug } from "@/data/locations";
 
@@ -47,32 +47,7 @@ export default function CityPage({ citySlug }: { citySlug?: string } = {}) {
     },
   ];
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "LocalBusiness",
-        "name": "Cash Ready Homes Hudson Valley",
-        "description": description,
-        "url": `https://cashreadyhomeshudsonvalley.com${canonical}`,
-        "telephone": "+19293565144",
-        "areaServed": {
-          "@type": "City",
-          "name": city.name,
-          "addressRegion": "NY",
-        },
-        "serviceType": "Cash Home Buyer",
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqItems.map(({ question, answer }) => ({
-          "@type": "Question",
-          "name": question,
-          "acceptedAnswer": { "@type": "Answer", "text": answer },
-        })),
-      },
-    ],
-  };
+  const schema = businessWithFaqGraph(faqItems);
 
   return (
     <SiteLayout>

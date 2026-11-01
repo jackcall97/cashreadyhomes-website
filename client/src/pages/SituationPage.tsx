@@ -2,7 +2,7 @@ import { useParams } from "wouter";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 interface SituationData {
@@ -228,6 +228,29 @@ export default function SituationPage() {
         title={situation.metaTitle}
         description={situation.metaDescription}
         canonical={canonical}
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            businessEntity(),
+            personEntity(),
+            {
+              "@type": "WebPage",
+              "@id": `${SITE_URL}${canonical}#webpage`,
+              url: `${SITE_URL}${canonical}`,
+              name: situation.metaTitle,
+              description: situation.metaDescription,
+              about: { "@id": BUSINESS_ID },
+              mainEntity: {
+                "@type": "Service",
+                name: situation.title,
+                serviceType: "Cash home buying",
+                provider: { "@id": BUSINESS_ID },
+                areaServed: "Hudson Valley, NY",
+                description: situation.metaDescription,
+              },
+            },
+          ],
+        }}
       />
 
       {/* Hero */}

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Star, ArrowRight, Home as HomeIcon, ChevronLeft, ChevronRight, Wrench, Calendar, DollarSign, CheckCircle, MapPin, AlertTriangle, Key, FileText, Flame, Building2, ClipboardCheck } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import LeadForm from "@/components/LeadForm";
-import SEOHead, { localBusinessSchema } from "@/components/SEOHead";
+import SEOHead, { siteEntityGraph } from "@/components/SEOHead";
 
 const PHONE = "(929) 356-5144";
 const PHONE_HREF = "tel:+19293565144";
@@ -77,7 +77,7 @@ export default function Home() {
         description="We buy houses for cash in Hudson Valley NY. No repairs, no fees, no commissions. Fair cash offer in 24 hours. Serving Westchester, Dutchess & more."
         keywords="sell house fast Hudson Valley, cash home buyers NY, we buy houses Westchester, sell house as-is, cash offer Hudson Valley"
         canonical="/"
-        schema={localBusinessSchema}
+        schema={siteEntityGraph()}
       />
 
       {/* ===== HERO ===== */}

@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, personEntity } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 const steps = [
@@ -39,6 +39,22 @@ export default function HowItWorks() {
         title="How It Works — Sell Your House Fast for Cash in Hudson Valley"
         description="Learn how our simple 4-step process works. Get a cash offer in 24 hours, close in less than 30 days, and walk away with cash — no repairs, no fees, no commissions."
         canonical="/how-it-works"
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            businessEntity(),
+            personEntity(),
+            {
+              "@type": "WebPage",
+              "@id": `${SITE_URL}/how-it-works#webpage`,
+              url: `${SITE_URL}/how-it-works`,
+              name: "How It Works — Cash Ready Homes Hudson Valley",
+              description: "Four-step cash home buying process: tell us about your property, get an offer in 24 hours, choose your closing date, and get paid.",
+              about: { "@id": BUSINESS_ID },
+              mainEntity: { "@id": BUSINESS_ID },
+            },
+          ],
+        }}
       />
 
       <section style={{ backgroundColor: "#1a3d1a" }} className="py-20">

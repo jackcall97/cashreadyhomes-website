@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight, CheckCircle, MapPin, Star, Phone } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { businessWithFaqGraph } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 
 const PHONE = "(929) 356-5144";
@@ -43,35 +43,7 @@ const faqItems = [
   },
 ];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "LocalBusiness",
-      "name": "Cash Ready Homes Hudson Valley",
-      "description": "We buy houses for cash throughout the Hudson Valley, NY — Westchester, Dutchess, Orange, Putnam, Rockland, and Ulster Counties. Any condition, any situation. Free offer in 24 hours.",
-      "url": "https://cashreadyhomeshudsonvalley.com/we-buy-houses-hudson-valley-ny",
-      "telephone": "+19293565144",
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Westchester County", "addressRegion": "NY" },
-        { "@type": "AdministrativeArea", "name": "Dutchess County", "addressRegion": "NY" },
-        { "@type": "AdministrativeArea", "name": "Orange County", "addressRegion": "NY" },
-        { "@type": "AdministrativeArea", "name": "Putnam County", "addressRegion": "NY" },
-        { "@type": "AdministrativeArea", "name": "Rockland County", "addressRegion": "NY" },
-        { "@type": "AdministrativeArea", "name": "Ulster County", "addressRegion": "NY" },
-      ],
-      "serviceType": "Cash Home Buyer",
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": faqItems.map(({ question, answer }) => ({
-        "@type": "Question",
-        "name": question,
-        "acceptedAnswer": { "@type": "Answer", "text": answer },
-      })),
-    },
-  ],
-};
+const schema = businessWithFaqGraph(faqItems);
 
 export default function WeBuyHousesHudsonValley() {
   return (
