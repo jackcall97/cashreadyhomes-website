@@ -20,7 +20,7 @@ export const counties: CountyData[] = [
   {
     name: "Westchester",
     slug: "westchester",
-    description: "Westchester County is located just north of New York City and is one of the most affluent counties in the United States. With excellent schools, diverse communities, and easy access to Manhattan, Westchester is a highly desirable area for families and professionals.",
+    description: "Westchester County sits just north of New York City, with Metro-North Harlem, Hudson, and New Haven Line service and a mix of cities, villages, and towns from the Bronx line to the Hudson River and inland suburbs.",
     cities: [
       { name: "White Plains", slug: "white-plains", county: "Westchester", countySlug: "westchester", population: "58,000", description: "White Plains is the county seat of Westchester County and a commercial hub with Metro-North Harlem Line stations at White Plains and North White Plains. County land records and Surrogate’s Court are based here. Sellers often need certainty when repairs, tenants, vacant homes, or probate timelines make a long listing impractical. Cash Ready Homes buys White Plains properties as-is, without the uncertainty of the traditional market.", nearbyTowns: ["Harrison", "Scarsdale", "Yonkers"] },
       { name: "Yonkers", slug: "yonkers", county: "Westchester", countySlug: "westchester", population: "211,000", description: "Yonkers is Westchester County’s largest city and the fourth-largest city in New York State, with neighborhoods ranging from Getty Square and the Hudson waterfront to Ludlow, Park Hill, Greystone, Dunwoodie, and Crestwood. Housing includes older multi-family buildings and single-family stock; sellers often face repairs, tenants, vacant houses, or estate timelines. Cash Ready Homes buys Yonkers houses and multi-family properties as-is, with no repairs required and no realtor commissions from us.", nearbyTowns: ["Mount Vernon", "Bronxville", "Hastings-on-Hudson"] },
@@ -40,7 +40,7 @@ export const counties: CountyData[] = [
   {
     name: "Dutchess",
     slug: "dutchess",
-    description: "Dutchess County stretches along the eastern bank of the Hudson River and is known for its scenic beauty, historic estates, farm-to-table culture, and growing arts scene. The county offers a mix of rural charm and urban amenities.",
+    description: "Dutchess County runs along the eastern bank of the Hudson River, with the county seat in Poughkeepsie, Metro-North Hudson Line service at Beacon and Poughkeepsie, and towns ranging from Fishkill near I-84 to Rhinebeck and Red Hook farther north.",
     cities: [
       { name: "Poughkeepsie", slug: "poughkeepsie", county: "Dutchess", countySlug: "dutchess", population: "30,000", description: "Poughkeepsie is Dutchess County’s county seat and a mid-Hudson hub spanning the separate City of Poughkeepsie and surrounding Town of Poughkeepsie. Metro-North’s Hudson Line terminates here; nearby landmarks include the Walkway Over the Hudson. Cash Ready Homes buys houses as-is in both the City and the Town.", nearbyTowns: ["Hyde Park", "Wappingers Falls", "Fishkill"] },
       { name: "Beacon", slug: "beacon", county: "Dutchess", countySlug: "dutchess", population: "15,000", description: "Beacon is a Hudson River city in southern Dutchess County with Metro-North Hudson Line service and a Main Street arts corridor anchored in part by Dia Beacon in a former Nabisco factory. Cash Ready Homes buys Beacon houses as-is.", nearbyTowns: ["Fishkill", "Newburgh", "Cold Spring"] },
@@ -55,7 +55,7 @@ export const counties: CountyData[] = [
   {
     name: "Orange",
     slug: "orange",
-    description: "Orange County offers some of the most affordable real estate in the Hudson Valley while still providing easy access to New York City via I-87 and Metro-North. The county features diverse communities, scenic landscapes, and a growing economy.",
+    description: "Orange County lies west of the Hudson River, with county government in Goshen, the I-84 / Thruway junction near Newburgh, Route 17 / I-84 corridors around Middletown, and Metro-North Port Jervis Line service in the county.",
     cities: [
       { name: "Newburgh", slug: "newburgh", county: "Orange", countySlug: "orange", population: "28,000", description: "Newburgh refers to both the City of Newburgh on the Hudson and the surrounding Town of Newburgh near I-84 and I-87. Cash Ready Homes buys houses as-is in both municipalities.", nearbyTowns: ["Beacon", "Middletown", "Cornwall"] },
       { name: "Middletown", slug: "middletown", county: "Orange", countySlug: "orange", population: "28,000", description: "Middletown is a city in north-central Orange County near NY Route 17 and I-84, with Metro-North Port Jervis Line service at the Middletown–Town of Wallkill station area. Cash Ready Homes buys Middletown houses as-is.", nearbyTowns: ["Goshen", "Wallkill", "Newburgh"] },
@@ -71,7 +71,7 @@ export const counties: CountyData[] = [
   {
     name: "Putnam",
     slug: "putnam",
-    description: "Putnam County is a small, scenic county nestled between Westchester and Dutchess Counties. Known for its natural beauty, hiking trails, and quiet communities, Putnam offers a peaceful alternative to the busier counties to the south.",
+    description: "Putnam County sits between Westchester and Dutchess, with the county seat in Carmel, Metro-North Harlem Line service at Brewster, Hudson Line service at Cold Spring, and lake and Highlands communities such as Mahopac and Philipstown.",
     cities: [
       { name: "Carmel", slug: "carmel", county: "Putnam", countySlug: "putnam", population: "35,000", description: "Carmel is the county seat of Putnam County and the largest town in the county. Lake Carmel and Mahopac are popular communities within the town.", nearbyTowns: ["Mahopac", "Brewster", "Patterson"] },
       { name: "Brewster", slug: "brewster", county: "Putnam", countySlug: "putnam", population: "2,400", description: "Brewster is a village in southeastern Putnam County with Metro-North service to Grand Central. It offers affordable housing and easy commuting options.", nearbyTowns: ["Carmel", "Patterson", "Southeast"] },
@@ -83,7 +83,7 @@ export const counties: CountyData[] = [
   {
     name: "Rockland",
     slug: "rockland",
-    description: "Rockland County is located on the west bank of the Hudson River, directly north of New Jersey and just 25 miles from Manhattan. Despite its small size, Rockland has a diverse population and some of the most competitive real estate in the Hudson Valley.",
+    description: "Rockland County sits on the west bank of the Hudson River north of New Jersey, with the county seat in New City and communities including Nyack, Spring Valley, Suffern, Haverstraw, and Nanuet.",
     cities: [
       { name: "Nyack", slug: "nyack", county: "Rockland", countySlug: "rockland", population: "7,000", description: "Nyack is an incorporated Hudson River village within the Town of Orangetown in Rockland County, with Village Hall on North Broadway. Nearby Upper Nyack and South Nyack are separate villages. Rockland County land records and Surrogate’s Court are in New City. Cash Ready Homes buys Nyack houses as-is.", nearbyTowns: ["South Nyack", "Upper Nyack", "Piermont"] },
       { name: "Spring Valley", slug: "spring-valley", county: "Rockland", countySlug: "rockland", population: "32,000", description: "Spring Valley is the largest and most densely populated village in Rockland County, with one of the most diverse communities in the entire Hudson Valley. The village's housing market has seen dramatic price appreciation, with median sale prices reaching approximately $585,000 in 2025 — driven by strong demand from buyers seeking more space than New York City offers. Spring Valley has a large stock of multi-family homes and older single-family properties, and the village experiences a higher-than-average rate of foreclosure filings and estate sales. Cash Ready Homes buys Spring Valley properties in any condition — including multi-family buildings, inherited homes, and properties with code violations — with a cash offer within 24 hours and no fees or commissions.", nearbyTowns: ["Nanuet", "Monsey", "New City"] },
@@ -96,7 +96,7 @@ export const counties: CountyData[] = [
   {
     name: "Ulster",
     slug: "ulster",
-    description: "Ulster County is one of the most scenic counties in New York State, featuring the Catskill Mountains, the Hudson River, and charming historic towns. The county has seen dramatic growth in recent years as remote workers and creatives discover its beauty and affordability.",
+    description: "Ulster County stretches from the Hudson’s west bank into the Catskills and along the Shawangunks, with the county seat in Kingston and communities including New Paltz, Woodstock, Saugerties, Highland, and Ellenville.",
     cities: [
       { name: "Kingston", slug: "kingston", county: "Ulster", countySlug: "ulster", population: "23,000", description: "Kingston is Ulster County’s seat, with historic Stockade/Uptown and Rondout districts that merged when the city was incorporated in 1872. Cash Ready Homes buys Kingston houses as-is.", nearbyTowns: ["Rhinebeck", "Woodstock", "Saugerties"] },
       { name: "Woodstock", slug: "woodstock", county: "Ulster", countySlug: "ulster", population: "6,000", description: "Woodstock is world-famous for its arts community and counterculture history. The town attracts artists, musicians, and nature lovers from around the world.", nearbyTowns: ["Saugerties", "Phoenicia", "Bearsville"] },
