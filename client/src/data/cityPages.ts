@@ -509,6 +509,274 @@ export const cityPageContent: Record<string, CityPageContent> = {
     ],
   },
 
+  yonkers: {
+    metaTitle: "Sell My House Fast in Yonkers NY | Cash Offer Near Metro-North",
+    metaDescription:
+      "Sell your house fast in Yonkers, NY. Cash Ready Homes buys as-is homes from Getty Square to Crestwood and Dunwoodie. NY attorney closing, your timeline, no realtor commissions.",
+    h1: "Sell Your House Fast in Yonkers, NY",
+    opener:
+      "Cash Ready Homes Hudson Valley buys houses for cash in Yonkers, Westchester County — New York State’s fourth-largest city and Westchester’s largest. Tell us about your property, receive a cash offer, and close on your timeline with a New York real estate attorney and title company. We buy as-is across waterfront and Getty Square blocks, Ludlow and Park Hill, Greystone, Dunwoodie, Crestwood, and other neighborhoods, including multi-family buildings and homes that need work. There are no realtor commissions and no fees charged by us. When repairs, tenants, vacant rooms, or an estate timeline make a traditional listing impractical, a direct cash sale can simplify the path to closing without weeks of showings. Share basic details online or by phone and we aim to present a cash offer within 24 hours so you can decide with clear next steps.",
+    sections: [
+      {
+        heading: "Yonkers neighborhoods and housing stock",
+        paragraphs: [
+          "Yonkers stretches along the Hudson River north of the Bronx with a dense downtown around Getty Square — the city’s civic and transit hub — plus riverside redevelopment near the Metro-North Yonkers station on the Hudson Line (Amtrak also serves the station). Other areas include Ludlow (with its own Hudson Line stop), Park Hill, Greystone/North Broadway, Dunwoodie, Homefield, Runyon Heights, and more suburban Crestwood/Cedar Knolls streets toward the Harlem Line. Housing ranges from older multi-family buildings and hillside houses to postwar single-family stock; deferred maintenance and tenant-occupied properties are common seller situations.",
+          "Westchester County deeds record with the Westchester County Clerk’s Land Records Division in White Plains (PREP cover pages and state transfer forms are part of the recording process). Estate sales that need court authority generally go through Westchester County Surrogate’s Court, also in White Plains. We coordinate attorney and title so those requirements are handled while you sell as-is.",
+        ],
+      },
+      {
+        heading: "Why Yonkers sellers want certainty",
+        paragraphs: [
+          "Commuter rail and proximity to New York City support demand, but they do not remove listing friction when a house needs major repairs, tenants limit showings, a property is vacant, or an inherited home must close on a fiduciary’s timeline. We present a cash offer without requiring renovations, and you choose the closing date.",
+          "Compare county options on our Westchester hub, or read how it works. Nearby cities we also serve include Mount Vernon, New Rochelle, and White Plains.",
+        ],
+      },
+    ],
+    faqItems: [
+      {
+        question: "Do you buy Yonkers multi-family buildings and houses that need repairs?",
+        answer:
+          "Yes. We buy Yonkers single-family and multi-family properties as-is, including homes that need structural or cosmetic work. No renovations are required before closing.",
+      },
+      {
+        question: "Can I sell a Yonkers rental with tenants still living there?",
+        answer:
+          "Yes. Tenant-occupied Yonkers properties can receive a cash offer. You do not need to finish an eviction first.",
+      },
+      {
+        question: "Where are Westchester deeds recorded for a Yonkers sale?",
+        answer:
+          "Westchester County land records are recorded with the County Clerk in White Plains. Closings we complete are coordinated with a New York real estate attorney and a title company.",
+      },
+      {
+        question: "Do you buy inherited or probate homes in Yonkers?",
+        answer:
+          "Yes. Estate conveyances in Westchester County often require authority from Westchester County Surrogate’s Court in White Plains. We work with estate counsel and title and buy as-is.",
+      },
+      {
+        question: "Which parts of Yonkers do you cover?",
+        answer:
+          "We buy throughout the City of Yonkers, including downtown/Getty Square and waterfront areas, Ludlow, Park Hill, Greystone, Dunwoodie, Crestwood, and other neighborhoods.",
+      },
+    ],
+    internalLinks: [
+      { href: "/sell-my-house-fast-westchester-county-ny", label: "Westchester County cash home buyers" },
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/situations/as-is", label: "Sell as-is" },
+      { href: "/situations/bad-tenants", label: "Sell with tenants" },
+      { href: "/situations/inherited-property", label: "Inherited house" },
+      { href: "/situations/probate", label: "Probate sale" },
+      { href: "/situations/vacant-house", label: "Vacant house" },
+    ],
+    nearbyCityLinks: [
+      { href: "/sell-my-house-fast-mount-vernon-ny", label: "Mount Vernon" },
+      { href: "/sell-my-house-fast-new-rochelle-ny", label: "New Rochelle" },
+      { href: "/sell-my-house-fast-white-plains-ny", label: "White Plains" },
+      { href: "/sell-my-house-fast-hastings-on-hudson-ny", label: "Hastings-on-Hudson" },
+    ],
+  },
+
+  "white-plains": {
+    metaTitle: "Sell My House Fast in White Plains NY | Westchester County Seat",
+    metaDescription:
+      "Sell your house fast in White Plains, NY. Cash offers for as-is homes in Westchester’s county seat near Metro-North. NY attorney closing, your timeline, no realtor commissions.",
+    h1: "Sell Your House Fast in White Plains, NY",
+    opener:
+      "Cash Ready Homes Hudson Valley buys houses for cash in White Plains, the county seat of Westchester County. Share details about your property, receive a cash offer, and close on your timeline with a New York real estate attorney and title company. We buy as-is — including older houses that need work, condos and multi-family properties, vacant homes, rentals with tenants, and estate situations. There are no realtor commissions and no fees charged by us. Because White Plains hosts major county offices — including the County Clerk’s land records and Surrogate’s Court — and a busy downtown with Metro-North Harlem Line access, sellers often need certainty more than a long listing when repairs or probate timelines intervene. Request an offer online or by phone and we aim to respond within 24 hours.",
+    sections: [
+      {
+        heading: "County seat, downtown, and commuting",
+        paragraphs: [
+          "White Plains is Westchester’s county seat and a commercial hub about 25 miles north of Midtown Manhattan. Downtown includes county and court facilities alongside retail and a growing residential component. The city is served by two Metro-North Harlem Line stations — White Plains (downtown) and North White Plains — plus Bee-Line bus connections at the TransCenter. Westchester County Airport is nearby in Harrison and is often referred to colloquially in connection with White Plains air travel.",
+          "The Westchester County Clerk’s Land Records Division records deeds and mortgages for properties countywide from White Plains, and Westchester County Surrogate’s Court (probate and estate administration) is also located in White Plains. Local sellers dealing with inherited houses frequently coordinate counsel around those offices — we buy estate properties as-is once the fiduciary has authority to convey.",
+        ],
+      },
+      {
+        heading: "Housing situations we see in White Plains",
+        paragraphs: [
+          "Inventory ranges from downtown residential buildings to single-family streets in surrounding neighborhoods. Sellers contact us when updates would be costly before listing, when tenants limit showings, when a house is vacant, or when an estate must close cleanly. A cash offer lets you skip repairs and choose a closing date that fits attorney and title scheduling.",
+          "See our Westchester hub for nearby cities such as Yonkers, New Rochelle, and Scarsdale, and read how it works for the process steps.",
+        ],
+      },
+    ],
+    faqItems: [
+      {
+        question: "Do you buy White Plains houses and condos as-is?",
+        answer:
+          "Yes. We buy White Plains properties as-is, including homes and units that need repairs. No renovations or staging are required before closing.",
+      },
+      {
+        question: "Where are deeds recorded for a White Plains sale?",
+        answer:
+          "Westchester County deeds are recorded with the County Clerk’s Land Records Division in White Plains. We close with a New York real estate attorney and a title company so recording requirements are handled.",
+      },
+      {
+        question: "Do you buy probate homes in White Plains?",
+        answer:
+          "Yes. Westchester County Surrogate’s Court is in White Plains. Fiduciaries typically need court-issued letters before conveying estate real estate. We coordinate with estate counsel and buy as-is.",
+      },
+      {
+        question: "Can I sell a White Plains rental with tenants in place?",
+        answer:
+          "Yes. Tenant-occupied properties can receive a cash offer without completing an eviction first.",
+      },
+      {
+        question: "How fast can I get a cash offer in White Plains?",
+        answer:
+          "Share basic property details online or by phone and we aim to present a cash offer within 24 hours. There is no obligation to accept. If you move forward, you pick the closing date.",
+      },
+    ],
+    internalLinks: [
+      { href: "/sell-my-house-fast-westchester-county-ny", label: "Westchester County hub" },
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/situations/probate", label: "Probate house sale" },
+      { href: "/situations/inherited-property", label: "Inherited house" },
+      { href: "/situations/as-is", label: "Sell as-is" },
+      { href: "/situations/divorce", label: "Sell during divorce" },
+      { href: "/situations/vacant-house", label: "Vacant house" },
+    ],
+    nearbyCityLinks: [
+      { href: "/sell-my-house-fast-yonkers-ny", label: "Yonkers" },
+      { href: "/sell-my-house-fast-new-rochelle-ny", label: "New Rochelle" },
+      { href: "/sell-my-house-fast-scarsdale-ny", label: "Scarsdale" },
+      { href: "/sell-my-house-fast-tarrytown-ny", label: "Tarrytown" },
+    ],
+  },
+
+  "new-rochelle": {
+    metaTitle: "Sell My House Fast in New Rochelle NY | Sound Shore Cash Buyers",
+    metaDescription:
+      "Sell your house fast in New Rochelle, NY. Cash offers for as-is homes near Metro-North New Haven Line and Amtrak. NY attorney closing, seller timeline, no realtor commissions.",
+    h1: "Sell Your House Fast in New Rochelle, NY",
+    opener:
+      "Cash Ready Homes Hudson Valley buys houses for cash in New Rochelle, Westchester County — a Sound Shore city with an intermodal downtown rail hub on Metro-North’s New Haven Line and Amtrak’s Northeast Corridor. Tell us about your property, receive a cash offer, and close on your timeline with a New York real estate attorney and title company. We buy as-is, including older houses that need work, multi-family buildings, vacant homes, rentals with tenants, and estate properties. There are no realtor commissions and no fees charged by us. When a listing would demand costly repairs, tenant-limited showings, or uncertain timing for an inherited house, a direct cash sale can provide a clearer close. Share property details online or by phone and we aim to present a cash offer within 24 hours.",
+    sections: [
+      {
+        heading: "Downtown transit hub and city housing mix",
+        paragraphs: [
+          "New Rochelle’s downtown train station is an intermodal center connecting Metro-North New Haven Line service, Amtrak, and Westchester Bee-Line buses, with a city transit-center garage supporting park-and-ride and transfers. The city notes the station is among the busiest New Haven Line stops in New York outside New York City and is the Amtrak stop for southern Westchester on the Northeast Regional. Housing ranges from downtown residential buildings to single-family neighborhoods toward Pelham, Larchmont, and Mamaroneck borders, plus coastal and inland streets with older stock that may need updates before competing on the open market.",
+          "Closings still record at the county level: Westchester County Clerk in White Plains for deeds, and Westchester County Surrogate’s Court in White Plains when estate letters are required. We buy throughout the City of New Rochelle and coordinate attorney and title without asking you to renovate first.",
+        ],
+      },
+      {
+        heading: "Situations we help New Rochelle sellers with",
+        paragraphs: [
+          "Common reasons sellers contact us include deferred maintenance, tenant-occupied buildings, vacant houses, inherited property, divorce timelines, and foreclosure pressure. Commuter demand supports the city, but it does not erase the cost of getting a tired property ready to list.",
+          "Request a cash offer, choose your closing date, and see our Westchester hub or how-it-works page for next steps. Nearby cities include Yonkers, Mount Vernon, and White Plains.",
+        ],
+      },
+    ],
+    faqItems: [
+      {
+        question: "Do you buy New Rochelle houses near downtown and in outlying neighborhoods?",
+        answer:
+          "Yes. We buy throughout the City of New Rochelle — downtown residential buildings and neighborhood single-family or multi-family homes — as-is.",
+      },
+      {
+        question: "Can I sell a New Rochelle rental with tenants in place?",
+        answer:
+          "Yes. Tenant-occupied properties can receive a cash offer without completing an eviction first.",
+      },
+      {
+        question: "How does a New Rochelle cash closing work?",
+        answer:
+          "Accepted offers close with a New York real estate attorney and a title company. Westchester deeds record with the County Clerk in White Plains. You choose the timeline; we do not charge realtor commissions or fees from us.",
+      },
+      {
+        question: "Do you buy inherited homes in New Rochelle?",
+        answer:
+          "Yes. Estate sales in Westchester County often require Surrogate’s Court authority in White Plains before the fiduciary can convey title. We coordinate with estate counsel and buy as-is.",
+      },
+      {
+        question: "Does Metro-North access change how a cash sale works?",
+        answer:
+          "New Rochelle’s rail connections support local demand, but a cash sale is about your timeline and clear title. We can close on a schedule you choose after an accepted offer, without requiring showings or repairs.",
+      },
+    ],
+    internalLinks: [
+      { href: "/sell-my-house-fast-westchester-county-ny", label: "Westchester County hub" },
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/situations/as-is", label: "Sell as-is" },
+      { href: "/situations/bad-tenants", label: "Sell with tenants" },
+      { href: "/situations/inherited-property", label: "Inherited house" },
+      { href: "/situations/probate", label: "Probate sale" },
+      { href: "/situations/foreclosure", label: "Foreclosure timeline" },
+    ],
+    nearbyCityLinks: [
+      { href: "/sell-my-house-fast-yonkers-ny", label: "Yonkers" },
+      { href: "/sell-my-house-fast-mount-vernon-ny", label: "Mount Vernon" },
+      { href: "/sell-my-house-fast-white-plains-ny", label: "White Plains" },
+      { href: "/sell-my-house-fast-port-chester-ny", label: "Port Chester" },
+    ],
+  },
+
+  nyack: {
+    metaTitle: "Sell My House Fast in Nyack NY | Rockland Village Cash Buyers",
+    metaDescription:
+      "Sell your house fast in Nyack, NY. Cash offers for as-is homes in this Hudson River village in Orangetown, Rockland County. NY attorney closing, no realtor commissions.",
+    h1: "Sell Your House Fast in Nyack, NY",
+    opener:
+      "Cash Ready Homes Hudson Valley buys houses for cash in Nyack, Rockland County — a Hudson River village within the Town of Orangetown. Share details about your property, receive a cash offer, and close on your timeline with a New York real estate attorney and title company. We buy as-is, including older village homes that need work, vacant houses, rentals with tenants, and inherited properties. There are no realtor commissions and no fees charged by us. Whether your tax bill shows the Village of Nyack or you are comparing nearby Rockland river villages, we focus on clear title and a closing date you can plan around. Rockland County land records and Surrogate’s Court are in New City; we coordinate attorney and title so those steps stay on track while you sell without repairs.",
+    sections: [
+      {
+        heading: "Village of Nyack in the Town of Orangetown",
+        paragraphs: [
+          "Nyack is an incorporated village with Village Hall on North Broadway. It sits primarily within the Town of Orangetown, which has its own town government in Orangeburg. Nearby villages such as Upper Nyack and South Nyack are separate municipalities — a Nyack-area mailing address does not automatically mean Village of Nyack taxes or zoning. Confirm the municipality on your tax bill before assuming one clerk’s office handles local permits.",
+          "County land records for Rockland County are recorded with the Rockland County Clerk in New City. Rockland County Surrogate’s Court — for probate and estate administration — is likewise in New City. We buy Nyack village properties and coordinate attorney and title through those county processes when deeds and estate letters are required.",
+        ],
+      },
+      {
+        heading: "River-village housing and selling situations",
+        paragraphs: [
+          "Nyack’s housing includes older village streets near Broadway and Main Street, hillside and river-adjacent blocks, and a mix of single-family and multi-unit buildings. Sellers often need a fast close when renovations would be costly, tenants limit showings, a house is vacant, or an estate must be settled through Surrogate’s Court in New City. The Governor Mario M. Cuomo Bridge links Rockland to Westchester, supporting regional commuting patterns, but a cash sale still turns on your timeline rather than waiting out a traditional market cycle.",
+          "Get a cash offer without repairing first. See our Rockland County hub and how-it-works page, and nearby communities such as Suffern, Spring Valley, and New City coverage via the county page.",
+        ],
+      },
+    ],
+    faqItems: [
+      {
+        question: "Is Nyack the same as Orangetown?",
+        answer:
+          "No. The Village of Nyack is an incorporated village that sits within the Town of Orangetown. They are separate local governments. We buy houses in the Village of Nyack; confirm your tax bill for the exact municipality.",
+      },
+      {
+        question: "Do you buy Nyack houses that need repairs?",
+        answer:
+          "Yes. We buy Nyack properties as-is. No renovations or staging are required before closing.",
+      },
+      {
+        question: "Where are Rockland County deeds recorded?",
+        answer:
+          "Rockland County land records are recorded with the County Clerk in New City. We close with a New York real estate attorney and a title company so recording is handled correctly.",
+      },
+      {
+        question: "Do you buy inherited or probate homes in Nyack?",
+        answer:
+          "Yes. Estate sales in Rockland County often require authority from Rockland County Surrogate’s Court in New City. We coordinate with estate counsel and buy as-is.",
+      },
+      {
+        question: "Can I sell a Nyack rental with tenants in place?",
+        answer:
+          "Yes. Tenant-occupied Nyack houses can receive a cash offer without completing an eviction first.",
+      },
+    ],
+    internalLinks: [
+      { href: "/sell-my-house-fast-rockland-county-ny", label: "Rockland County cash home buyers" },
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/situations/as-is", label: "Sell as-is" },
+      { href: "/situations/inherited-property", label: "Inherited house" },
+      { href: "/situations/probate", label: "Probate sale" },
+      { href: "/situations/vacant-house", label: "Vacant house" },
+      { href: "/situations/bad-tenants", label: "Sell with tenants" },
+    ],
+    nearbyCityLinks: [
+      { href: "/sell-my-house-fast-suffern-ny", label: "Suffern" },
+      { href: "/sell-my-house-fast-spring-valley-ny", label: "Spring Valley" },
+      { href: "/sell-my-house-fast-new-city-ny", label: "New City" },
+      { href: "/sell-my-house-fast-tarrytown-ny", label: "Tarrytown" },
+    ],
+  },
+
 };
 
 export function getCityPageContent(slug: string): CityPageContent | undefined {
