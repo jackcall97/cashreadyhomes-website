@@ -1,7 +1,7 @@
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import SEOHead from "@/components/SEOHead";
+import SEOHead, { BUSINESS_ID, SITE_URL, businessEntity, faqPageNode } from "@/components/SEOHead";
 import LeadForm from "@/components/LeadForm";
 import { getPostBySlug } from "@/lib/blog";
 import NotFound from "@/pages/NotFound";
@@ -14,16 +14,54 @@ function readingTime(content: string) {
   return Math.max(1, Math.ceil(content.split(/\s+/).length / 200));
 }
 
-// Render markdown content — handles ##/###/#### headings, */-/+ lists, **bold** inline, and plain paragraphs
+// Render markdown content — handles ##/###/#### headings, */-/+ lists, **bold**, [text](/path) links, and plain paragraphs
 function renderInline(text: string): React.ReactNode {
-  // Replace **bold** with <strong>
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      const [, label, href] = link;
+      const className = "text-[#1a3d1a] font-semibold underline underline-offset-2 hover:text-[#F5C518]";
+      if (href.startsWith("/")) {
+        return (
+          <Link key={i} href={href} className={className}>
+            {label}
+          </Link>
+        );
+      }
+      return (
+        <a key={i} href={href} className={className} rel="noopener noreferrer">
+          {label}
+        </a>
+      );
+    }
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
     return part;
   });
+}
+
+/** Pull Q&A pairs from a "## Frequently Asked Questions" section (### question + following paragraphs). */
+function extractFaqs(content: string): { question: string; answer: string }[] {
+  const match = content.match(/## Frequently Asked Questions\s*\n([\s\S]*?)(?=\n## [^#]|\s*$)/i);
+  if (!match) return [];
+  const section = match[1].trim();
+  if (!section) return [];
+  const normalized = section.replace(/^###\s+/, "");
+  return normalized
+    .split(/\n###\s+/)
+    .map((block) => {
+      const nl = block.indexOf("\n");
+      const question = (nl === -1 ? block : block.slice(0, nl)).trim();
+      const answer = (nl === -1 ? "" : block.slice(nl + 1))
+        .trim()
+        .replace(/\n+/g, " ")
+        .replace(/\*\*([^*]+)\*\*/g, "$1")
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+      return { question, answer };
+    })
+    .filter((f) => f.question && f.answer);
 }
 
 function renderContent(content: string) {
@@ -119,32 +157,29 @@ export default function BlogPost() {
     );
   }
 
-  const articleSchema = {
-    "@context": "https://schema.org",
+  const faqs = extractFaqs(post.content);
+  const articleNode = {
     "@type": "Article",
     "headline": post.metaTitle || post.title,
     "description": post.metaDescription || post.excerpt,
-    "image": post.featuredImage ? `https://cashreadyhomeshudsonvalley.com${post.featuredImage}` : undefined,
+    "image": post.featuredImage ? `${SITE_URL}${post.featuredImage}` : undefined,
     "datePublished": new Date(post.createdAt).toISOString(),
     "dateModified": new Date(post.updatedAt ?? post.createdAt).toISOString(),
-    "author": {
-      "@type": "Organization",
-      "name": "Cash Ready Homes Hudson Valley",
-      "url": "https://cashreadyhomeshudsonvalley.com",
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Cash Ready Homes Hudson Valley",
-      "url": "https://cashreadyhomeshudsonvalley.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://cashreadyhomeshudsonvalley.com/manus-storage/logo-icon-crisp_222c6ff1.png",
-      },
-    },
+    "author": { "@id": BUSINESS_ID },
+    "publisher": { "@id": BUSINESS_ID },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://cashreadyhomeshudsonvalley.com/blog/${post.slug}`,
+      "@id": `${SITE_URL}/blog/${post.slug}`,
     },
+    "about": { "@id": BUSINESS_ID },
+  };
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      businessEntity(),
+      articleNode,
+      ...(faqs.length ? [faqPageNode(faqs)] : []),
+    ],
   };
 
   return (
