@@ -62,7 +62,7 @@ export default function Blog() {
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="group rounded-2xl overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow">
                   <div className="h-48 overflow-hidden" style={{ backgroundColor: "#1a3d1a" }}>
                     {post.featuredImage ? (
-                      <img src={post.featuredImage} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src={post.featuredImage} alt={post.featuredImageAlt || post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <span className="text-4xl">🏠</span>

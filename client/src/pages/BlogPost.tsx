@@ -224,7 +224,7 @@ export default function BlogPost() {
       {/* Featured image */}
       {post.featuredImage && (
         <div className="w-full h-72 lg:h-96 overflow-hidden">
-          <img src={post.featuredImage} alt={post.title} className="w-full h-full object-cover" />
+          <img src={post.featuredImage} alt={post.featuredImageAlt || post.title} className="w-full h-full object-cover" />
         </div>
       )}
 

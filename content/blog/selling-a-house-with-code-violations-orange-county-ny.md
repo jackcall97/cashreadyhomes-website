@@ -7,7 +7,8 @@ category: "Seller Guides"
 excerpt: "Open code violations, expired permits, or no certificate of occupancy? Here is how selling a house with code problems works in Newburgh, Middletown, and the rest of Orange County, NY."
 metaTitle: "Selling a House With Code Violations in Orange County NY"
 metaDescription: "How to sell a house with open code violations, open permits, or no certificate of occupancy in Newburgh, Middletown, and across Orange County, NY—your options explained."
-featuredImage: "/og-default.jpg"
+featuredImage: "/manus-storage/blog-code-violations-orange-county_1ca6d9ad.webp"
+featuredImageAlt: "Older Hudson Valley house with peeling paint and a weathered porch in autumn leaves"
 published: true
 ---
 A letter from the building department, an open permit from a project that never got its final inspection, or a finished basement nobody ever filed paperwork for: code problems are one of the most common reasons Orange County homeowners feel stuck. The good news is that a house with code violations can still be sold. The real question is who fixes the problem, who pays for it, and how much time you have.

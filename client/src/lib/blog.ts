@@ -10,6 +10,7 @@ export interface BlogPost {
   metaTitle: string;
   metaDescription: string;
   featuredImage: string;
+  featuredImageAlt?: string;
   published: boolean;
   content: string;
   // aliases kept so existing page code works unchanged
@@ -50,6 +51,7 @@ function parse(raw: string, file: string): BlogPost {
     metaTitle: (fm.metaTitle as string) || "",
     metaDescription: (fm.metaDescription as string) || "",
     featuredImage: (fm.featuredImage as string) || "",
+    featuredImageAlt: (fm.featuredImageAlt as string) || undefined,
     published: fm.published !== false,
     content: m[2].trim(),
     createdAt: date,

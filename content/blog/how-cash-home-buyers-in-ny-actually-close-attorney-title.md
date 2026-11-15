@@ -7,7 +7,8 @@ category: "Seller Guides"
 excerpt: "A plain-English look at New York cash closings: attorneys, title search and insurance, the contract of sale, and transfer tax for Hudson Valley sellers."
 metaTitle: "How Cash Home Buyers in NY Close: Attorney & Title"
 metaDescription: "How New York cash home sales actually close—attorneys, title search/insurance, contracts, and transfer tax—for Westchester, Dutchess, Orange, Putnam, Rockland, and Ulster sellers."
-featuredImage: "/og-default.jpg"
+featuredImage: "/manus-storage/blog-attorney-title-closing_8e2d6472.webp"
+featuredImageAlt: "Closing table with legal documents, a pen, and house keys in a bright office"
 published: true
 ---
 If you are selling a house for cash in the Hudson Valley, closing looks different from many other states. New York is an **attorney-state**: residential deals are typically handled by real estate attorneys working with a title company, not by a title or escrow office alone. That holds across [Westchester](/sell-my-house-fast-westchester-county-ny), [Dutchess](/sell-my-house-fast-dutchess-county-ny), [Orange](/sell-my-house-fast-orange-county-ny), [Putnam](/sell-my-house-fast-putnam-county-ny), [Rockland](/sell-my-house-fast-rockland-county-ny), and [Ulster](/sell-my-house-fast-ulster-county-ny) Counties.
