@@ -31,6 +31,7 @@ const COUNTIES = [
 export const SAME_AS = [
   "https://www.facebook.com/profile.php?id=61595723107949",
   "https://www.instagram.com/cashreadyhomeshudsonvalley/",
+  "https://www.youtube.com/@CashReadyHomesHudsonValley",
 ] as const;
 
 /** Canonical LocalBusiness entity (service-area; no street address). */
@@ -60,11 +61,36 @@ export function businessEntity() {
 }
 
 
-/** Homepage / shared graph: LocalBusiness + Person. */
+/** Homepage / shared graph: LocalBusiness. */
 export function siteEntityGraph() {
   return {
     "@context": "https://schema.org",
     "@graph": [businessEntity()],
+  };
+}
+
+/** Intro video on the homepage (YouTube). */
+export function introVideoObject() {
+  return {
+    "@type": "VideoObject",
+    "@id": `${SITE_URL}/#intro-video`,
+    name: "Cash Ready Homes Hudson Valley Intro",
+    description:
+      "Cash Ready Homes Hudson Valley buys houses as-is in the Hudson Valley, New York. No repairs, no cleanout, and no agent fees. Get a fair cash offer and pick your closing date.",
+    thumbnailUrl: "https://i.ytimg.com/vi/wOAvVhRXrBY/sddefault.jpg",
+    uploadDate: "2026-11-14",
+    duration: "PT20S",
+    embedUrl: "https://www.youtube.com/embed/wOAvVhRXrBY",
+    contentUrl: "https://www.youtube.com/watch?v=wOAvVhRXrBY",
+    publisher: { "@id": BUSINESS_ID },
+  };
+}
+
+/** Homepage graph: LocalBusiness + intro VideoObject. */
+export function homeEntityGraph() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [businessEntity(), introVideoObject()],
   };
 }
 
