@@ -141,19 +141,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== INTRO VIDEO ===== */}
-      <section className="py-16 bg-white">
-        <div className="container">
-          <div className="text-center mb-8">
-            <p className="text-[#F5C518] font-bold text-sm uppercase tracking-widest mb-2">Watch</p>
-            <h2 className="text-[#1a3d1a] font-black text-3xl lg:text-4xl">See how it works in 20 seconds</h2>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            <YouTubeFacade />
-          </div>
-        </div>
-      </section>
-
       {/* ===== STATS BAR ===== */}
       <section style={{ backgroundColor: "#F5C518" }} className="py-8">
         <div className="container">
@@ -199,6 +186,18 @@ export default function Home() {
             <button onClick={() => document.getElementById('get-offer')?.scrollIntoView({ behavior: 'smooth', block: 'center' })} className="btn-yellow inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-lg">
               Start Now — Get My Cash Offer <ArrowRight className="w-5 h-5" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== INTRO VIDEO ===== */}
+      <section className="pb-20 bg-white">
+        <div className="container">
+          <div className="text-center mb-8">
+            <h2 className="text-[#1a3d1a] font-black text-3xl lg:text-4xl">See how it works in 20 seconds</h2>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <YouTubeFacade />
           </div>
         </div>
       </section>
