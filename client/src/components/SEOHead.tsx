@@ -28,11 +28,23 @@ const COUNTIES = [
   "Ulster County",
 ] as const;
 
-export const SAME_AS = [
-  "https://www.facebook.com/profile.php?id=61595723107949",
-  "https://www.instagram.com/cashreadyhomeshudsonvalley/",
-  "https://www.youtube.com/@CashReadyHomesHudsonValley",
+/** Official social profiles — footer and LocalBusiness sameAs share this list. */
+export const SOCIAL_PROFILES = [
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61595723107949",
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/cashreadyhomeshudsonvalley/",
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@CashReadyHomesHudsonValley",
+  },
 ] as const;
+
+export const SAME_AS = SOCIAL_PROFILES.map((profile) => profile.href);
 
 /** Canonical LocalBusiness entity (service-area; no street address). */
 export function businessEntity() {

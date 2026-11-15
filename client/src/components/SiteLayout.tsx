@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Facebook, Instagram, Youtube } from "lucide-react";
+import { SOCIAL_PROFILES } from "@/components/SEOHead";
+
+const socialIcons = {
+  Facebook,
+  Instagram,
+  YouTube: Youtube,
+} as const;
 
 const PHONE = "(929) 356-5144";
 const PHONE_HREF = "tel:+19293565144";
@@ -183,6 +190,23 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               <a href={PHONE_HREF} className="text-white font-bold hover:text-[#F5C518] transition-colors">
                 {PHONE}
               </a>
+              <div className="flex items-center gap-1 mt-5">
+                {SOCIAL_PROFILES.map((profile) => {
+                  const Icon = socialIcons[profile.name];
+                  return (
+                    <a
+                      key={profile.href}
+                      href={profile.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Cash Ready Homes on ${profile.name}`}
+                      className="inline-flex items-center justify-center w-11 h-11 rounded-full text-gray-400 hover:text-[#F5C518] hover:bg-white/10 transition-colors"
+                    >
+                      <Icon className="w-5 h-5" aria-hidden="true" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Counties */}
