@@ -90,7 +90,7 @@ export function introVideoObject() {
     description:
       "Cash Ready Homes Hudson Valley buys houses as-is in the Hudson Valley, New York. No repairs, no cleanout, and no agent fees. Get a fair cash offer and pick your closing date.",
     thumbnailUrl: "https://i.ytimg.com/vi/wOAvVhRXrBY/sddefault.jpg",
-    uploadDate: "2026-11-14",
+    uploadDate: "2026-11-14T00:00:00-05:00",
     duration: "PT20S",
     embedUrl: "https://www.youtube.com/embed/wOAvVhRXrBY",
     contentUrl: "https://www.youtube.com/watch?v=wOAvVhRXrBY",
